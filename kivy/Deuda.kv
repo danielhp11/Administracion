@@ -1,0 +1,85 @@
+#: include kivy/Historial.kv
+#: include kivy/Compra.kv
+<ContentNP>
+    orientation: "vertical"
+    spacing: "18dp"
+    size_hint_y: None
+    height: "180dp"
+
+    MDTextField:
+        id: Nombre
+        hint_text: "Nombre"
+
+    MDTextField:
+        id:Mes
+        hint_text: "Meses para pagar"
+    
+    MDTextField:
+        id:Total
+        hint_text: "Total"
+
+MDNavigationLayout:
+    id: nav_layout
+
+    ScreenManager:
+        Screen:
+
+            BoxLayout:
+                orientation: "vertical"
+
+                MDToolbar:
+                    elevation: 10
+                    title:'Cuenta : 4152 3134 9851 7213    $: '+str( app.pagos_mes() )[1:-1]
+                    left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+
+                
+                ScreenManager: 
+                    id: screen_manager
+
+                    Compra: 
+                        id: Compras
+                        name: "Deuda"
+                    
+                    Historial:
+                        id: Historial
+                        name: "Historial"
+                    
+
+                    
+        
+    MDNavigationDrawer:
+        id: nav_drawer
+
+        BoxLayout:
+            orientation: "vertical"
+            padding: "8dp"
+            spacing: "8dp"
+
+            Image: 
+                size_hint: None , None
+                size: "200dp" , "200dp"
+                #source: "logo.png"   
+
+            
+            ScrollView:
+                MDList:
+
+                    OneLineIconListItem:
+                        text: "Compras"
+                        on_release:
+                            screen_manager.current = "Deuda"
+                            nav_drawer.set_state () 
+
+                        IconLeftWidget:
+                            icon: "view-dashboard"
+                    
+                    OneLineIconListItem:
+                        text: "Historial"
+                        on_release:
+                            screen_manager.current = "Historial"
+                            nav_drawer.set_state () 
+
+                        IconLeftWidget:
+                            icon: "view-dashboard"
+
+                        

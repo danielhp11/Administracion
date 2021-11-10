@@ -1,0 +1,17 @@
+<Compra>:
+    AnchorLayout:
+        anchor_x:'center'
+        anchor_y:'bottom'
+
+        BoxLayout:
+            orientation:'horizontal'
+
+            Button:
+                text: 'Nueva compra'
+                size_hint:(.3,.1)
+                on_release: root.show_confirmation_dialog()
+
+            Button:
+                text: 'Eliminar compra'
+                size_hint:(.3,.1)
+                on_release: root.deleteCompra()
